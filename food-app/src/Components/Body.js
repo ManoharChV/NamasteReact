@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import RestroCard from "./RestroCard";
 import axios from "axios";
 import Shimmer from "./Shimmer";
-
+import { Link } from "react-router-dom";
+import RestaurantMenu from "./RestaurantMenu";
 function Body() {
   useEffect(() => {
     getData().then((res) => {
@@ -60,15 +61,15 @@ function Body() {
       <div className="res-container">
         {filteredResList.map((r) => {
           return (
-            <RestroCard
+            <Link               key={r.info.id}
+            to={"/restaurants/"+r.info.id}><RestroCard 
               name={r.info.name}
               forTwo={r.info.costForTwo}
               rating={r.info.avgRating}
               cuisine={r.info.cuisines.join(",")}
               eta={r.info.sla.slaString}
               imgId={r.info.cloudinaryImageId}
-              key={r.info.id}
-            ></RestroCard>
+            ></RestroCard></Link>
           );
         })}
       </div>

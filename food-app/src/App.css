@@ -22,7 +22,9 @@
   width: 100%;
   height: 45%;
 }
-
+.res-logo{
+  height: 200px 
+}
 .nav-items > ul > li {
   padding: 10px;
   margin: 10px;
