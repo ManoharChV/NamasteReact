@@ -67,3 +67,9 @@
 .search-btn {
   margin: 10px;
 }
+.user-card{
+  height: 150px;
+  width: 500px;
+  border: 1px solid black;
+  padding: 5px;
+}
