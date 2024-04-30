@@ -3,7 +3,7 @@ import RestroCard from "./RestroCard";
 import axios from "axios";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-import RestaurantMenu from "./RestaurantMenu";
+import { useOnlineStatus } from "../utils/useOnlineStatus";
 function Body() {
   useEffect(() => {
     getData().then((res) => {
@@ -25,6 +25,9 @@ function Body() {
   }
   const [resList, setresList] = useState([]);
   const [filteredResList, setFilteredResList] = useState([]);
+  if(!useOnlineStatus()){
+    return <h1>Looks like you are offline!!! please check your internet connection</h1>
+  }
   return resList.length === 0 ? (
     <Shimmer></Shimmer>
   ) : (
@@ -61,15 +64,24 @@ function Body() {
       <div className="res-container">
         {filteredResList.map((r) => {
           return (
-            <Link               key={r.info.id}
-            to={"/restaurants/"+r.info.id}><RestroCard 
-              name={r.info.name}
-              forTwo={r.info.costForTwo}
-              rating={r.info.avgRating}
-              cuisine={r.info.cuisines.join(",")}
-              eta={r.info.sla.slaString}
-              imgId={r.info.cloudinaryImageId}
-            ></RestroCard></Link>
+            /*Link is used to route the application to specific route 
+            to={routename and params}
+            route name must defined in the createBrowserRouter (refer index.js)
+            */
+            <Link
+              className="text-link"
+              key={r.info.id}
+              to={"/restaurants/" + r.info.id}
+            >
+              <RestroCard
+                name={r.info.name}
+                forTwo={r.info.costForTwo}
+                rating={r.info.avgRating}
+                cuisine={r.info.cuisines.join(",")}
+                eta={r.info.sla.slaString}
+                imgId={r.info.cloudinaryImageId}
+              ></RestroCard>
+            </Link>
           );
         })}
       </div>

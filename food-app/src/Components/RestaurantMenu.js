@@ -4,22 +4,14 @@ import { useEffect } from 'react'
 import { CLOUDINARY_URL, MENU_URL } from '../utils/constants'
 import { useParams } from 'react-router-dom'
 import Shimmer from './Shimmer'
+import { useRestaurantMenu } from '../utils/useRestaurantMenu'
 
  const RestaurantMenu = () => {
+  //useParams -- used to read the route params
   const {resId}=useParams();
-  const [items, setItems]=useState([]);
-  const [resInfo, setResInfo]=useState({});
-  console.log(resId)
-  useEffect(()=>{
-    fetchMenu();
-  }, [])
-  let  fetchMenu=async ()=>{
-    let res=await axios.get(MENU_URL+resId)
-    let items=res?.data?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[3]?.card?.card?.itemCards;
-    let resinfo=res?.data?.data?.cards[2]?.card?.card?.info
-    setResInfo(resinfo)
-    setItems(items??[])
-  }
+ 
+  //Custom Hook useRestaurantMenu
+  const [resInfo, items]=useRestaurantMenu(resId);
   return items.length===0?<Shimmer></Shimmer>: ( 
     <div className='rest-menu'>
         <h1>{resInfo.name}</h1>
@@ -29,7 +21,7 @@ import Shimmer from './Shimmer'
         <h2>Menu</h2>
         <ul>
           {items.map((i)=>{
-            return (<li key={i.card.info.id}>{i.card.info.name}: {i.card.info.price/100} </li>)
+            return (<li key={i.card.info.id}>{i.card.info.name}:{(i.card.info.price|| i.card.info.defaultPrice)/100} </li>)
           })}
         </ul>
     </div>

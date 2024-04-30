@@ -1,6 +1,5 @@
 import "./App.css";
 import Header from "./Components/Header";
-import Body from "./Components/Body";
 import React from "react";
 
 import { Outlet } from "react-router-dom";
@@ -8,6 +7,9 @@ function App() {
   return (
     <div>
       <Header></Header>
+      {/*Outlet --
+      component is used as a placeholder within a parent route component to render child routes
+      will be replaced with the respective route component defined in createBrowserRouter (refer index.js)*/}
       <Outlet></Outlet>
     </div>
   );
