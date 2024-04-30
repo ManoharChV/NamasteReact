@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import RestroCard from "./RestroCard";
+import RestroCard, { withPromotedLabel } from "./RestroCard";
 import axios from "axios";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { useOnlineStatus } from "../utils/useOnlineStatus";
 function Body() {
+  const PromotedRestrocard = withPromotedLabel(RestroCard);
   useEffect(() => {
     getData().then((res) => {
       console.log(res.data.data.cards);
-      setresList(
-        res.data.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
-      );
-      setFilteredResList(
-        res.data.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
-      );
+      let list =
+        res.data.data.cards[4].card.card.gridElements.infoWithStyle.restaurants;
+      list[0]["info"]["promoted"] = true;
+      setresList(list);
+      setFilteredResList(list);
     });
   }, []);
   const [searchText, setSearchText] = useState("");
@@ -25,9 +25,14 @@ function Body() {
   }
   const [resList, setresList] = useState([]);
   const [filteredResList, setFilteredResList] = useState([]);
-  if(!useOnlineStatus()){
-    return <h1>Looks like you are offline!!! please check your internet connection</h1>
+  if (!useOnlineStatus()) {
+    return (
+      <h1>
+        Looks like you are offline!!! please check your internet connection
+      </h1>
+    );
   }
+  console.log(resList);
   return resList.length === 0 ? (
     <Shimmer></Shimmer>
   ) : (
@@ -73,14 +78,19 @@ function Body() {
               key={r.info.id}
               to={"/restaurants/" + r.info.id}
             >
-              <RestroCard
+              {r.info.promoted?<PromotedRestrocard  name={r.info.name}
+                forTwo={r.info.costForTwo}
+                rating={r.info.avgRating}
+                cuisine={r.info.cuisines.join(",")}
+                eta={r.info.sla.slaString}
+                imgId={r.info.cloudinaryImageId}></PromotedRestrocard>:<RestroCard
                 name={r.info.name}
                 forTwo={r.info.costForTwo}
                 rating={r.info.avgRating}
                 cuisine={r.info.cuisines.join(",")}
                 eta={r.info.sla.slaString}
                 imgId={r.info.cloudinaryImageId}
-              ></RestroCard>
+              ></RestroCard> }
             </Link>
           );
         })}

@@ -18,4 +18,12 @@ function RestroCard(props) {
   );
 }
 
+
+export const withPromotedLabel=(restroCard)=>{
+  return (props)=>{
+    return (<div><label className="promoted-label">Promoted</label>
+    <restroCard {...props} ></restroCard>
+     </div>)
+  }
+}
 export default RestroCard;
