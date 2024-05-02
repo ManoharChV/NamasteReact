@@ -3,14 +3,13 @@ import { CLOUDINARY_URL } from "../utils/constants";
 import Shimmer from "./Shimmer";
 
 export const RestaurantCategory = (props) => {
-  const [showItems, setShowItems] = useState(false);
   return (
     <div className="p-[5px]">
       <div className=" border-solid rounded-lg	 border mx-auto  w-[55%]">
         <div
           className="flex h-[50px]   justify-between items-center"
           onClick={() => {
-            setShowItems(!showItems);
+            props.setShowItemsIndex()
           }}
         >
           <div className="m-5" >
@@ -20,7 +19,7 @@ export const RestaurantCategory = (props) => {
             </span>
           </div>
           <div className="m-5 cursor-pointer">
-            {showItems? <span>⬆️</span>:
+            {props.showItems? <span>⬆️</span>:
             <span>⬇️</span>}
           </div>
         </div>
@@ -28,7 +27,7 @@ export const RestaurantCategory = (props) => {
           {props?.cat?.card?.card?.itemCards.length === 0 ? (
             <Shimmer></Shimmer>
           ) : (
-            showItems &&
+            props.showItems &&
             props?.cat?.card?.card?.itemCards.map((i) => {
               return (
                 <div className="border   rounded-lg		 m-2">

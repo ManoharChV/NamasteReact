@@ -7,7 +7,7 @@ function Header() {
   const onlineStatus = useOnlineStatus();
   console.log(onlineStatus);
   return (
-    <div className="flex sticky top-0 justify-between h-[80px] border-solid border-2 border-black  mb-1 bg-gray-100">
+    <div className="flex justify-between h-[80px] border-solid border-2 border-black  mb-1 bg-gray-100">
       <div className="logo-container">
         <img className="h-[100%] w-30" alt="logo" src={LOGO_URL}></img>
       </div>

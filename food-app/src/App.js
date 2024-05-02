@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 function App() {
   return (
     <div>
-      <div className="header" >
+      <div className="header sticky top-0" >
       <Header ></Header>
       </div>
       {/*Outlet --

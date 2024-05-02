@@ -13,6 +13,10 @@ const RestaurantMenu = () => {
 
   //Custom Hook useRestaurantMenu
   const [resInfo, items, categories] = useRestaurantMenu(resId);
+
+  /*Lifting State up */
+  const [showItems, setShowItems] = useState(false);
+  const [showItemIndex, setShowItemIndex] = useState(null);
   return items.length === 0 ? (
     <Shimmer></Shimmer>
   ) : (
@@ -26,14 +30,29 @@ const RestaurantMenu = () => {
         <h3>{resInfo.cuisines.join(",")}</h3>
       </div>
       <div className="flex justify-center">
-      <h2 className="font-bold">Menu</h2>
+        <h2 className="font-bold">Menu</h2>
       </div>
-      <ul>
-        {categories.map((cat) => {
-          return <RestaurantCategory 
-            key={cat?.card?.card?.title} cat={cat} />;
-        })}
-      </ul>
+      <div>
+        <ul>
+          {categories.map((cat, index) => {
+            return (
+              <RestaurantCategory
+                key={cat?.card?.card?.title}
+                cat={cat}
+                showItems={index === showItemIndex}
+                showIndex={showItemIndex}
+                setShowItemsIndex={() => {
+                  if (showItemIndex === index) {
+                    setShowItemIndex(null);
+                  } else {
+                    setShowItemIndex(index);
+                  }
+                }}
+              />
+            );
+          })}
+        </ul>
+      </div>
     </div>
   );
 };
