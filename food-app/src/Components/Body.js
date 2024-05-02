@@ -37,63 +37,63 @@ function Body() {
     <Shimmer></Shimmer>
   ) : (
     <div className="body">
-      <div className="filter">
-        <input
-          value={searchText}
-          onChange={(e) => {
-            setSearchText(e.target.value);
-          }}
-        ></input>
-        <button
-          className="search-btn"
-          onClick={() => {
-            let filteredList = resList.filter((r) =>
-              r.info.name.toLowerCase().includes(searchText.toLowerCase())
-            );
-            setFilteredResList(filteredList);
-          }}
-        >
-          Search
-        </button>
-        <button
-          onClick={(e) => {
-            console.log(resList);
-            let filteredList = resList.filter((r) => r.info.avgRating > 4.2);
-            console.log(filteredList);
-            setFilteredResList(filteredList);
-          }}
-        >
-          Top Restaurants
-        </button>
-      </div>
-      <div className="res-container">
-        {filteredResList.map((r) => {
-          return (
-            /*Link is used to route the application to specific route 
+      <div className=" m-0 p-0">
+        <div className="flex">
+          <input
+            className="border-solid border-2 mr-5 ml-[2px] w-[25%]  focus-within :border-blue-400 border-black"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          ></input>
+          <button
+            className=" border-solid border-gray-500 text-white  hover:bg-blue-900 mr-10 px-8  bg-blue-700 "
+            onClick={() => {
+              let filteredList = resList.filter((r) =>
+                r.info.name.toLowerCase().includes(searchText.toLowerCase())
+              );
+              setFilteredResList(filteredList);
+            }}
+          >
+            Search
+          </button>
+          <button
+            onClick={(e) => {
+              console.log(resList);
+              let filteredList = resList.filter((r) => r.info.avgRating > 4.2);
+              console.log(filteredList);
+              setFilteredResList(filteredList);
+            }}
+          >
+            Top Restaurants
+          </button>
+        </div>
+        <div className="flex flex-wrap  pt-[30px] justify-evenly mt-1 gap-2">
+          {filteredResList.map((r) => {
+            return (
+              /*Link is used to route the application to specific route 
             to={routename and params}
             route name must defined in the createBrowserRouter (refer index.js)
             */
-            <Link
-              className="text-link"
-              key={r.info.id}
-              to={"/restaurants/" + r.info.id}
-            >
-              {r.info.promoted?<PromotedRestrocard  name={r.info.name}
-                forTwo={r.info.costForTwo}
-                rating={r.info.avgRating}
-                cuisine={r.info.cuisines.join(",")}
-                eta={r.info.sla.slaString}
-                imgId={r.info.cloudinaryImageId}></PromotedRestrocard>:<RestroCard
-                name={r.info.name}
-                forTwo={r.info.costForTwo}
-                rating={r.info.avgRating}
-                cuisine={r.info.cuisines.join(",")}
-                eta={r.info.sla.slaString}
-                imgId={r.info.cloudinaryImageId}
-              ></RestroCard> }
-            </Link>
-          );
-        })}
+              <Link
+                className=""
+                key={r.info.id}
+                to={"/restaurants/" + r.info.id}
+              >
+                {
+                  <RestroCard
+                    name={r.info.name}
+                    forTwo={r.info.costForTwo}
+                    rating={r.info.avgRating}
+                    cuisine={r.info.cuisines.join(",")}
+                    eta={r.info.sla.slaString}
+                    imgId={r.info.cloudinaryImageId}
+                  ></RestroCard>
+                }
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

@@ -4,23 +4,33 @@ import { Link } from "react-router-dom";
 import { useOnlineStatus } from "../utils/useOnlineStatus";
 function Header() {
   const [btnName, setBtnName] = useState("Login");
-  const onlineStatus=useOnlineStatus();
+  const onlineStatus = useOnlineStatus();
   console.log(onlineStatus);
   return (
-    <div className="header">
+    <div className="flex sticky top-0 justify-between h-[80px] border-solid border-2 border-black  mb-1 bg-gray-100">
       <div className="logo-container">
-        <img className="logo" alt="logo" src={LOGO_URL}></img>
+        <img className="h-[100%] w-30" alt="logo" src={LOGO_URL}></img>
       </div>
-      <div className="nav-items">
-        <ul>
-          <li className="nav-item">Online status : {useOnlineStatus()? "✅":"🔴"}</li>
-          <li className="nav-item"><Link to={"/"}>Home</Link></li>
-          <li className="nav-item" ><Link to={"/about"}>About us</Link></li>
-          <li className="nav-item"><Link to={"/contact"}>Contact us</Link></li>
-          <li className="nav-item"><Link to={"/groceries"}>Groceries</Link></li>
-          <li className="nav-item">Cart</li>
+      <div>
+        <ul className="flex items-center py-6 ">
+          <li className="px-5 cursor-pointer">
+            Online status : {useOnlineStatus() ? "✅" : "🔴"}
+          </li>
+          <li className="px-5 cursor-pointer">
+            <Link to={"/"}>Home</Link>
+          </li>
+          <li className="px-5 cursor-pointer">
+            <Link to={"/about"}>About us</Link>
+          </li>
+          <li className="px-5 cursor-pointer">
+            <Link to={"/contact"}>Contact us</Link>
+          </li>
+          <li className="px-5 cursor-pointer">
+            <Link to={"/groceries"}>Groceries</Link>
+          </li>
+          <li className="px-5 cursor-pointer">Cart</li>
           <button
-            className="login-btn"
+            className="px-5"
             onClick={() => {
               btnName === "Login" ? setBtnName("Logout") : setBtnName("Login");
             }}
