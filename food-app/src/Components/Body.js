@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import RestroCard, { withPromotedLabel } from "./RestroCard";
 import axios from "axios";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { useOnlineStatus } from "../utils/useOnlineStatus";
+import { UserContext } from "../utils/userContext";
 function Body() {
+  const {loggedInUser}=useContext(UserContext);
+  const{setUserName}=useContext(UserContext)
   const PromotedRestrocard = withPromotedLabel(RestroCard);
   useEffect(() => {
     getData().then((res) => {
-      console.log(res.data.data.cards);
       let list =
         res.data.data.cards[4].card.card.gridElements.infoWithStyle.restaurants;
       list[0]["info"]["promoted"] = true;
@@ -32,7 +34,6 @@ function Body() {
       </h1>
     );
   }
-  console.log(resList);
   return resList.length === 0 ? (
     <Shimmer></Shimmer>
   ) : (
@@ -57,11 +58,16 @@ function Body() {
           >
             Search
           </button>
+          <input
+            className="border-solid border-2 mr-5 ml-[2px] w-[25%]  focus-within :border-blue-400 border-black"
+            value={loggedInUser}
+            onChange={(e) => {
+              setUserName(e.target.value)
+            }}
+          ></input>
           <button
             onClick={(e) => {
-              console.log(resList);
               let filteredList = resList.filter((r) => r.info.avgRating > 4.2);
-              console.log(filteredList);
               setFilteredResList(filteredList);
             }}
           >

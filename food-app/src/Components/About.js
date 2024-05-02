@@ -2,6 +2,7 @@ import axios from "axios";
 import { User } from "./User";
 import UserClass from "./UserClass";
 import React from "react";
+import { UserContext } from "../utils/userContext";
 
 export default class About extends React.Component{
     constructor(props){
@@ -34,6 +35,7 @@ export default class About extends React.Component{
         return (
             <div><h1>About</h1>
             <UserClass  name={this.state.name} location={this.state.location} contact={this.state.url} avatar={this.state.avatar_url}></UserClass>
+            <UserContext.Consumer>{(data)=>{console.log(data)}}</UserContext.Consumer>
             </div>);
     }
 }

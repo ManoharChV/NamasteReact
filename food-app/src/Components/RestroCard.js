@@ -1,5 +1,8 @@
 import { CLOUDINARY_URL } from "../utils/constants";
+import { UserContext } from "../utils/userContext";
+import { useContext } from "react";
 function RestroCard(props) {
+  const {loggedInUser}=useContext(UserContext);
   return (
     <div className="border-2  rounded-xl border-solid w-[270px] h-[450px] mb-5    border-gray-500 ">
       <div className="h-[200px] border  m-[20px] rounded-2xl">
@@ -15,13 +18,13 @@ function RestroCard(props) {
         <p>{props.rating} ratings</p>
         <p>{props.forTwo}</p>
         <p>{props.eta}</p>
+        <p>User:{loggedInUser}</p>
       </div>
     </div>
   );
 }
 
 export const withPromotedLabel = (RestroCard) => {
-  console.log("in promoted");
   return (props) => {
     return (
       <div >
