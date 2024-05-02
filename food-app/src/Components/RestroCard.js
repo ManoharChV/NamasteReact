@@ -21,11 +21,14 @@ function RestroCard(props) {
 }
 
 export const withPromotedLabel = (RestroCard) => {
+  console.log("in promoted");
   return (props) => {
     return (
-      <div>
-        <label>Promoted</label>
-        <RestroCard {...props}></RestroCard>
+      <div >
+        <label className=" m-5 p-1  text-white  bg-sky-600 absolute">Promoted</label>
+        <div >
+          <RestroCard {...props}></RestroCard>
+        </div>
       </div>
     );
   };

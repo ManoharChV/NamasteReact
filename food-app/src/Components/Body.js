@@ -79,8 +79,16 @@ function Body() {
                 className=""
                 key={r.info.id}
                 to={"/restaurants/" + r.info.id}
-              >
-                {
+              >{r.info.promoted ? (
+                  <PromotedRestrocard
+                    name={r.info.name}
+                    forTwo={r.info.costForTwo}
+                    rating={r.info.avgRating}
+                    cuisine={r.info.cuisines.join(",")}
+                    eta={r.info.sla.slaString}
+                    imgId={r.info.cloudinaryImageId}
+                  ></PromotedRestrocard>
+                ) : (
                   <RestroCard
                     name={r.info.name}
                     forTwo={r.info.costForTwo}
@@ -89,7 +97,7 @@ function Body() {
                     eta={r.info.sla.slaString}
                     imgId={r.info.cloudinaryImageId}
                   ></RestroCard>
-                }
+                )}
               </Link>
             );
           })}
