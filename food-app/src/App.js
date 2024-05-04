@@ -3,12 +3,16 @@ import Header from "./Components/Header";
 import React, { useContext, useState } from "react";
 import { UserContext } from "./utils/userContext";
 import { Outlet } from "react-router-dom";
+import { Provider } from "react-redux";
+import { appStore } from "./utils/appStore";
 function App() {
   const {loggedInUser}=useContext(UserContext);
   const [userName, setUserName]=useState(loggedInUser);
+  
   return (
+    <Provider store ={appStore}>
     <UserContext.Provider value={{loggedInUser:userName, setUserName:setUserName}}><div>
-      <div className="header sticky top-0" >
+      <div className="header sticky   z-[10000000000000] top-0" >
       <Header ></Header>
       </div>
       {/*Outlet --
@@ -17,7 +21,7 @@ function App() {
       <Outlet></Outlet>
     </div>
     </UserContext.Provider>
-
+    </Provider>
   );
 }
 export default App;

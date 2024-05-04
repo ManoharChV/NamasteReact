@@ -8,9 +8,9 @@ import { Error } from "./Components/Error";
 import Body from "./Components/Body";
 import RestaurantMenu from "./Components/RestaurantMenu"
 import { lazy } from "react";
+import { Cart } from "./Components/Cart";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
-
 //Chunking
 //Code Splitting
 //Lazy Loading
@@ -50,6 +50,11 @@ const appRouter=createBrowserRouter([
         element:<Suspense fallback={<h1>Loading...</h1>}><Grocery></Grocery></Suspense> ,
         errorElement:<Error></Error>
       },
+      {
+        path:"/cart",
+        element:<Cart></Cart> ,
+        errorElement:<Error></Error>
+      }
     ]
   },
  

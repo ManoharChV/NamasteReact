@@ -1,7 +1,4 @@
-import axios from "axios";
 import React, { useState } from "react";
-import { useEffect } from "react";
-import { CLOUDINARY_URL, MENU_URL } from "../utils/constants";
 import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import { useRestaurantMenu } from "../utils/useRestaurantMenu";
@@ -15,7 +12,6 @@ const RestaurantMenu = () => {
   const [resInfo, items, categories] = useRestaurantMenu(resId);
 
   /*Lifting State up */
-  const [showItems, setShowItems] = useState(false);
   const [showItemIndex, setShowItemIndex] = useState(null);
   return items.length === 0 ? (
     <Shimmer></Shimmer>
